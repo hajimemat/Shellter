@@ -1,0 +1,106 @@
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# --------------------------------------
+# キーバインド {{{
+# --------------------------------------
+autoload edit-command-line
+zle -N edit-command-line
+
+bindkey -v
+# bindkey -M vicmd 'gg' beginning-of-line
+# bindkey -M vicmd 'G'  end-of-line
+# bindkey -M viins 'jj'  vi-cmd-mode
+# bindkey -M viins '^r' history-incremental-pattern-search-backward
+# bindkey -M vicmd 'e' edit-command-line
+# bindkey -M vicmd 's' commit-to-history
+bindkey -M vicmd '/' history-incremental-pattern-search-forward
+bindkey -M vicmd '?' history-incremental-pattern-search-backward
+bindkey -M viins '^p' history-beginning-search-backward
+bindkey -M viins '^n' history-beginning-search-forward
+bindkey '^r' history-incremental-search-backward
+# }}}
+
+# --------------------------------------
+# history {{{
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt hist_ignore_dups     # ignore duplication command history list
+setopt share_history        # share command history data 
+setopt extended_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups
+setopt hist_ignore_all_dups
+setopt hist_ignore_space
+setopt hist_find_no_dups
+setopt hist_save_no_dups
+setopt hist_beep
+# }}}
+export EDITOR='nvim'
+export VISUAL='nvim'
+export PAGER='less'
+
+alias vi=nvim
+alias d=docker
+alias dc=docker-compose
+
+export LANG=ja_JP.UTF8
+
+# 上書きの警告を無視する
+setopt clobber
+# オートコレクトさせない
+unsetopt correct_all
+
+
+agent="$HOME/.ssh/$(hostname).agent"
+if [ -S "$SSH_AUTH_SOCK" ]; then
+    case $SSH_AUTH_SOCK in
+        /tmp/*/agent.[0-9]*)
+            ln -snf "$SSH_AUTH_SOCK" $agent && export SSH_AUTH_SOCK=$agent
+    esac
+elif [ -S $agent ]; then
+    export SSH_AUTH_SOCK=$agent
+else
+    echo "no ssh-agent"
+fi
+
+autoload -Uz promptinit
+promptinit
+prompt steeef
+
+fe() {
+    local files
+    IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
+        [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
+    }
+
+fkill() {
+    local pid
+    pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+
+    if [ "x$pid" != "x" ]
+    then
+        echo $pid | xargs kill -${1:-9}
+    fi
+}
+#export FZF_TMUX=1
+#export FZF_TMUX=1
+#export FZF_TMUX_HEIGHT=10
+#export FZF_TMUX_HEIGHT=10
+export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
+export FZF_DEFAULT_COMMAND='ag -g ""'
+[ -f ~/.localSettings/.zshrc ] && source ~/.localSettings/.zshrc
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+umask 002
+
+PATH="/home/kurari/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/kurari/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/kurari/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/kurari/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/kurari/perl5"; export PERL_MM_OPT;

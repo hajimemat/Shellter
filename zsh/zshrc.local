@@ -1,0 +1,46 @@
+#
+# ローカルセッティング
+#
+export MY_SLACK_TOKEN=xoxp-604252503172-601863466240-590643386611-334be51dc26735e4c98a2ddd617a979e
+export PYENV_ROOT=$HOME/.pyenv
+export PLANTUML="/usr/share/java/plantuml/plantuml.jar -config /home/kurari/nora/TWB.Sen/config.pu"
+export PATH=$HOME/go/bin:$HOME/.config/composer/vendor/bin:$PATH
+
+function f() {
+  local project dir repository session current_session
+  project=$(ghq list | fzf --prompt='Project >')
+
+  if [[ $project == "" ]]; then
+    return 1
+  fi
+  dir=$(ghq root)/${project}
+  cd $dir
+}
+
+# TmuxSessionJump
+function t() {
+  local session
+  session=$(tmux list-session | fzf --prompt='Session >' | awk -F: '{print $1}')
+  if [[ ! -z ${TMUX} ]]; then
+      tmux switch-client -t $session
+  else
+      tmux a -t $session
+  fi
+}
+# TmuxSessionCreate
+function tm() {
+    local session
+    session=${${1:-$(pwd)}//./-}
+    tmux list-sessions | cut -d":" -f1 | grep -e "^$session\$" > /dev/null
+    if [[ $? != 0 ]]; then
+        tmux new-session -d -c $(pwd) -s $session
+    fi
+    tmux switch-client -t $session
+}
+# Startx
+function s() {
+    local layout
+    layout=$(ls -1 ~/.screenlayout | fzf --prompt='Layout >')
+    sh ~/.screenlayout/$layout
+    sh ~/.config/polybar/launch.sh 2> /dev/null 1> /dev/null
+}
