@@ -5,6 +5,15 @@
 Shellに引きこもりたい。
 引きこもるなら快適にしたい。
 
+## 導入
+
+```
+cd 
+git clone https://github.com/hajimemat/shellter.git .shellter
+cd .shellter
+make zsh git vim tmux
+```
+
 ## Status
 
 開発開始段階
