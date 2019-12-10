@@ -1,11 +1,6 @@
 #
 # ローカルセッティング
 #
-export MY_SLACK_TOKEN=xoxp-604252503172-601863466240-590643386611-334be51dc26735e4c98a2ddd617a979e
-export PYENV_ROOT=$HOME/.pyenv
-export PLANTUML="/usr/share/java/plantuml/plantuml.jar -config /home/kurari/nora/TWB.Sen/config.pu"
-export PATH=$HOME/go/bin:$HOME/.config/composer/vendor/bin:$PATH
-
 function f() {
   local project dir repository session current_session
   project=$(ghq list | fzf --prompt='Project >')
