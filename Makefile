@@ -27,7 +27,7 @@ vim: ${HOME}/.vimrc ${HOME}/.config/nvim/init.vim ${HOME}/.vimrc.local
 ${HOME}/.vimrc:
 	ln -sf $(realpath vimrc) $@
 ${HOME}/.vimrc.local:
-	cp $(realpath ./vim/vimrc.local.dist) $@
+	cp $(realpath ./vimrc.local.dist) $@
 ${HOME}/.config:
 	mkdir -p $@
 ${HOME}/.config/nvim: ${HOME}/.config
