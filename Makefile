@@ -25,6 +25,12 @@ tmux: repos/Tmux
 fzf: repos/FZF
 	repos/FZF/install --all
 
+ghq: repos/ghq
+	cd repos/ghq && make install
+
+repos/ghq:
+	git clone https://github.com/motemen/ghq $@
+
 repos/FZF:
 	git clone https://github.com/junegunn/fzf $@
 
