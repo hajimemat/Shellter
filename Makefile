@@ -22,6 +22,11 @@ fish: repos/Fish
 tmux: repos/Tmux
 	cd repos/Tmux && git pull && make
 
+fzf: repos/FZF
+	repos/FZF/install --all
+
+repos/FZF:
+	git clone https://github.com/junegunn/fzf $@
 
 repos/%:
 	git clone https://github.com/hajimemat/Shellter.$(shell basename $@).git $@
