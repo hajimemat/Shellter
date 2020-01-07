@@ -7,7 +7,8 @@
 	zsh \
 	tmux \
 	fzf \
-	ghq
+	ghq \
+	git
 
 preset: vim zsh tmux
 
@@ -29,6 +30,13 @@ fzf: repos/FZF
 
 ghq: repos/ghq
 	cd repos/ghq && make install
+
+git: 
+	ln -sfv $(realpath files/git/gitconfig) ~/.gitconfig
+	make ~/.gitconfig.local
+
+~/.gitconfig.local:
+	cp -v files/git/gitconfig.local ~/.gitconfig.local
 
 repos/ghq:
 	git clone https://github.com/motemen/ghq $@

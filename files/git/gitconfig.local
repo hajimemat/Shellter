@@ -1,0 +1,7 @@
+[mergetool "vimdiff"]
+	path = nvim
+[merge]
+	tool = vimdiff
+[user]
+	name = Somebody
+	email = nobody@avap.co.jp
