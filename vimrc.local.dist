@@ -1,7 +1,7 @@
 scriptencoding utf-8 " 設定ファイルの文字コードを宣言
 
-# コンテキスト
+" コンテキスト
 let g:nora_vim_contexts = ['ide', 'desktop']
 
-# フレーバー
+" フレーバー
 let g:nora_vim_flavor = 'hajimemat'

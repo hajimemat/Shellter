@@ -47,7 +47,7 @@ alias vi=nvim
 alias d=docker
 alias dc=docker-compose
 
-export LANG=ja_JP.UTF8
+# export LANG=ja_JP.UTF8
 
 # 上書きの警告を無視する
 setopt clobber
