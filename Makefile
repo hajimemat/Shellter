@@ -5,7 +5,9 @@
 	preset \
 	vim \
 	zsh \
-	tmux
+	tmux \
+	fzf \
+	ghq
 
 preset: vim zsh tmux
 
