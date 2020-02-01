@@ -1,3 +1,4 @@
 # Shellter
 
-[v] ZSH
+- [v] ZSH
+- [v] GIT
