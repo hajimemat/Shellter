@@ -19,6 +19,8 @@ zsh: repos/zsh
 	cd repos/zsh && git pull && make
 vim: repos/vim
 	cd repos/vim && git pull && make
+tmux: repos/tmux
+	cd repos/tmux && git pull && make
 repos/%:
 	git clone https://github.com/hajimemat/shellter-$(shell basename $@).git $@
 
