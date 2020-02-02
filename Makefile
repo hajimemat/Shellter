@@ -6,7 +6,8 @@
 	zsh \
 	tmux \
 	i3 \
-	git
+	git \
+	gitlab
 
 preset: vim zsh tmux
 
@@ -21,6 +22,8 @@ tmux: repos/tmux
 	cd repos/tmux && git pull && make
 i3: repos/i3
 	cd repos/i3 && git pull && make
+gitlab:
+	make -f misc/lab.makefile
 repos/%:
 	git clone https://github.com/hajimemat/shellter-$(shell basename $@).git $@
 
