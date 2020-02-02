@@ -2,12 +2,10 @@
 # SHELLTER
 #
 .PHONY: \
-	preset \
 	vim \
 	zsh \
 	tmux \
-	fzf \
-	ghq \
+	i3 \
 	git
 
 preset: vim zsh tmux
