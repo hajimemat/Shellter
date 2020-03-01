@@ -9,7 +9,7 @@
 	git \
 	gitlab
 
-preset: vim zsh tmux
+preset: vim zsh tmux git
 
 # Git
 git: repos/git
